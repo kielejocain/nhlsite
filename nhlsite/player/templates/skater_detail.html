@@ -3,8 +3,35 @@
 {% block content %}
 
 <h1>{{ skater }}</h1>
-{% for season in skaterstats %}
-<p>Goals: {{ season.goals }}</p>
-{% endfor %}
+
+<p>DOB: {{ skater.birthday }}</p>
+
+<h2>Statistics</h2>
+<table class="table">
+    <tr>
+        <th>Season</th>
+        <th>G</th>
+        <th>A</th>
+        <th>P</th>
+        <th>+/-</th>
+        <th>PIM</th>
+        <th>S</th>
+        <th>S%</th>
+        <th>GWG</th>
+    </tr>
+    {% for season in skaterstats %}
+    <tr>
+        <td>{{ season.season }}</td>
+        <td>{{ season.goals }}</td>
+        <td>{{ season.assists }}</td>
+        <td>{{ season.points }}</td>
+        <td>{{ season.plus_minus }}</td>
+        <td>{{ season.penalty_minutes }}</td>
+        <td>{{ season.shots }}</td>
+        <td>{{ season.shot_pct }}</td>
+        <td>{{ season.gw_goals }}</td>
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}

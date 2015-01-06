@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.views.generic import ListView, DetailView
 
-from player.models import Skater, Skaterstats, SkaterPredictions
+from player.models import Skater, SkaterStats, SkaterPredictions
 
 
 class ListSkaterView(ListView):
@@ -19,6 +19,6 @@ class DetailSkaterView(DetailView):
         context = super(DetailSkaterView, self).get_context_data(**kwargs)
         context['skater'] = Skater.objects.get(pk=self.kwargs['pk'])
         skater_pk = context['skater'].pk
-        context['skaterstats'] = Skaterstats.objects.filter(nhl_num=skater_pk)
+        context['skaterstats'] = SkaterStats.objects.filter(nhl_num=skater_pk)
         context['skaterpredictions'] = SkaterPredictions.objects.get(pk=self.kwargs['pk'])
         return context

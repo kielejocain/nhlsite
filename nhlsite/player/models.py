@@ -87,6 +87,7 @@ class Skater(models.Model):
     class Meta:
         managed = False
         db_table = 'skaters'
+        ordering = ['last_name', 'first_name']
 
     def __str__(self):
         return ' '.join([self.first_name,
@@ -94,7 +95,7 @@ class Skater(models.Model):
                          ])
 
 
-class Skaterstats(models.Model):
+class SkaterStats(models.Model):
     nhl_num = models.IntegerField(primary_key=True)
     season = models.IntegerField(blank=True, null=True)
     team = models.CharField(max_length=3, blank=True)
@@ -147,6 +148,7 @@ class Skaterstats(models.Model):
     class Meta:
         managed = False
         db_table = 'skaterstats'
+        ordering = ['season']
 
 
 class SkaterPredictions(models.Model):
