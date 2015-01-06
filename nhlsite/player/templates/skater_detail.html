@@ -5,9 +5,14 @@
 <h1>{{ skater }}</h1>
 
 <p>DOB: {{ skater.birthday }}</p>
+{% if skater.draft_position %}
+<p>Drafted: {{ skater.draft_year }}, #{{ skater.draft_position }} Overall</p>
+{% else %}
+<p>Undrafted</p>
+{% endif %}
 
-<h2>Statistics</h2>
-<table class="table">
+<h2>NHL Statistics</h2>
+<table class="table table-striped">
     <tr>
         <th>Season</th>
         <th>G</th>
