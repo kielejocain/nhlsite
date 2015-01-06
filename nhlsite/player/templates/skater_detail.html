@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ skater }}</h1>
+{% for season in skaterstats %}
+<p>Goals: {{ season.goals }}</p>
+{% endfor %}
+
+{% endblock %}

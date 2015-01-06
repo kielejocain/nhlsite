@@ -12,6 +12,8 @@ urlpatterns = patterns('',
     url(r'^player/$', player.views.ListSkaterView.as_view(),
         name="skater_list",
     ),
+    url(r'^player/(?P<pk>\d{7})', player.views.DetailSkaterView.as_view(),
+        name="player_detail"),
 )
 
 urlpatterns += staticfiles_urlpatterns()
