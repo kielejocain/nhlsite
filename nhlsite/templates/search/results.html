@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Who Scored?{% endblock %}
+
+{% block content %}
+<h1>Search Results</h1>
+{% if results %}
+  <ul>
+  {% for result in results %}
+    <li><a href="{% url 'player_detail' pk=result.nhl_num %}">{{ result }}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+<p><i>No player matched your search.</i></p>
+{% endif %}
+{% endblock %}

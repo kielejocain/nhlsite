@@ -149,6 +149,9 @@ class SkaterStats(models.Model):
         managed = False
         db_table = 'skaterstats'
         ordering = ['season']
+        def __str__(self):
+            return ' '.join([str(self.nhl_num),
+                         ])
 
 
 class SkaterPredictions(models.Model):
@@ -158,6 +161,32 @@ class SkaterPredictions(models.Model):
     sh_toi = models.FloatField(blank=True, null=True)
     pp_toi = models.FloatField(blank=True, null=True)
     toi = models.FloatField(blank=True, null=True)
+    es_goals = models.FloatField(blank=True, null=True)
+    sh_goals = models.FloatField(blank=True, null=True)
+    pp_goals = models.FloatField(blank=True, null=True)
+    goals = models.FloatField(blank=True, null=True)
+    pp_points = models.FloatField(blank=True, null=True)
+    sh_points = models.FloatField(blank=True, null=True)
+    es_points = models.FloatField(blank=True, null=True)
+    es_assists = models.FloatField(blank=True, null=True)
+    pp_assists = models.FloatField(blank=True, null=True)
+    sh_assists = models.FloatField(blank=True, null=True)
+    shots = models.FloatField(blank=True, null=True)
+    shot_pct = models.FloatField(blank=True, null=True)
+    points = models.FloatField(blank=True, null=True)
+    assists = models.FloatField(blank=True, null=True)
+    minors = models.FloatField(blank=True, null=True)
+    majors = models.FloatField(blank=True, null=True)
+    misconducts = models.FloatField(blank=True, null=True)
+    game_misconducts = models.FloatField(blank=True, null=True)
+    penalty_minutes = models.FloatField(blank=True, null=True)
+    team_goals_for = models.FloatField(blank=True, null=True)
+    team_pp_goals_for = models.FloatField(blank=True, null=True)
+    team_goals_against = models.FloatField(blank=True, null=True)
+    team_pp_goals_against = models.FloatField(blank=True, null=True)
+    plus_minus = models.FloatField(blank=True, null=True)
+    faceoff_wins = models.FloatField(blank=True, null=True)
+    faceoff_losses = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False

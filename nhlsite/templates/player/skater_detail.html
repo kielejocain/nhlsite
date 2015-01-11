@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load mathfilters %}
+
+{% block title %}{{ skater }} Statistics - HockeyML{% endblock %}
+
+{% block content %}
+
+<h1>{{ skater }}</h1>
+
+<p>DOB: {{ skater.birthday }}</p>
+{% if skater.draft_position %}
+<p>Drafted: {{ skater.draft_year }}, #{{ skater.draft_position }} Overall</p>
+{% else %}
+<p>Undrafted</p>
+{% endif %}
+
+<h2>Base Statistics</h2>
+<table class="table table-hover">
+    <tr>
+        <th>Season</th>
+        <th>GP</th>
+        <th>G</th>
+        <th>A</th>
+        <th>P</th>
+        <th>+/-</th>
+        <th>PIM</th>
+        <th>S</th>
+        <th>S%</th>
+    </tr>
+    {% for season in skaterstats %}
+    <tr>
+        <td>{{ season.season }}</td>
+        <td>{{ season.games_played }}</td>
+        <td>{{ season.goals }}</td>
+        <td>{{ season.assists }}</td>
+        <td>{{ season.points }}</td>
+        <td>{{ season.plus_minus }}</td>
+        <td>{{ season.penalty_minutes }}</td>
+        <td>{{ season.shots }}</td>
+        <td>{{ season.shot_pct }}</td>
+    </tr>
+    {% endfor %}
+    <tr class="danger">
+        <td>2015 (Predicted)</td>
+        <td>{{ skaterpredictions.games_played|floatformat:"0" }}</td>
+        <td>{{ skaterpredictions.goals|floatformat:"0" }}</td>
+        <td>{{ skaterpredictions.assists|floatformat:"0" }}</td>
+        <td>{{ skaterpredictions.points|floatformat:"0" }}</td>
+        <td>{{ skaterpredictions.plus_minus|floatformat:"0" }}</td>
+        <td>{{ skaterpredictions.penalty_minutes|floatformat:"0" }}</td>
+        <td>{{ skaterpredictions.shots|floatformat:"0" }}</td>
+        <td>{{ skaterpredictions.shot_pct|floatformat:"1" }}</td>
+    </tr>
+</table>
+
+<h2>Situational Statistics</h2>
+<table class="table table-hover">
+    <tr>
+        <th></th>
+        <th colspan="3">Time On Ice Per Game</th>
+        <th colspan="2">Goals</th>
+        <th colspan="2">Points</th>
+    </tr>
+    <tr>
+        <th>Season</th>
+        <th>Total</th>
+        <th>PP</th>
+        <th>SH</th>
+        <th>PP</th>
+        <th>SH</th>
+        <th>PP</th>
+        <th>SH</th>
+    </tr>
+    {% for season in skaterstats %}
+    <tr>
+        <td>{{ season.season }}</td>
+        <td>{{ season.toi|intdiv:60 }}:{% if season.toi|mod:60 < 10 %}0{% endif %}{{ season.toi|mod:60 }}</td>
+        <td>{{ season.pp_toi|intdiv:60 }}:{% if season.pp_toi|mod:60 < 10 %}0{% endif %}{{ season.pp_toi|mod:60 }}</td>
+        <td>{{ season.sh_toi|intdiv:60 }}:{% if season.sh_toi|mod:60 < 10 %}0{% endif %}{{ season.sh_toi|mod:60 }}</td>
+        <td>{{ season.pp_goals }}</td>
+        <td>{{ season.sh_goals }}</td>
+        <td>{{ season.pp_points }}</td>
+        <td>{{ season.sh_points }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
