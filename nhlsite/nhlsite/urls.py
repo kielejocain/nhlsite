@@ -4,6 +4,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from home import views
 import player.views
 import search.views
+import stats.views
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,6 +18,7 @@ urlpatterns = patterns('',
     ),
     url(r'^player/(?P<pk>\d{7})', player.views.DetailSkaterView.as_view(),
         name="player_detail"),
+    url(r'^stat/goal|Goal', stats.views.goals, name="goal_detail"),
 )
 
 urlpatterns += staticfiles_urlpatterns()

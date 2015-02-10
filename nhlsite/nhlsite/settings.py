@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'mathfilters',
     'home',
     'player',
+    'stat',
 )
 
 MIDDLEWARE_CLASSES = (
