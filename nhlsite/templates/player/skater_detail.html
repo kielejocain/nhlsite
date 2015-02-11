@@ -41,6 +41,7 @@
         <td>{{ season.shot_pct }}</td>
     </tr>
     {% endfor %}
+    {% if skaterpredictions %}
     <tr class="danger">
         <td>2015 (Predicted)</td>
         <td>{{ skaterpredictions.games_played|floatformat:"0" }}</td>
@@ -52,6 +53,7 @@
         <td>{{ skaterpredictions.shots|floatformat:"0" }}</td>
         <td>{{ skaterpredictions.shot_pct|floatformat:"1" }}</td>
     </tr>
+    {% endif %}
 </table>
 
 <h2>Situational Statistics</h2>

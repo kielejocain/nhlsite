@@ -20,5 +20,5 @@ class DetailSkaterView(DetailView):
         context['skater'] = Skater.objects.get(pk=self.kwargs['pk'])
         skater_pk = context['skater'].pk
         context['skaterstats'] = SkaterStats.objects.filter(nhl_num=skater_pk)
-        context['skaterpredictions'] = SkaterPredictions.objects.get(pk=self.kwargs['pk'])
+        context['skaterpredictions'] = SkaterPredictions.objects.filter(pk=self.kwargs['pk']).first()
         return context

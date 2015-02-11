@@ -3,7 +3,7 @@
   <head>
     <title>{% block title %}HockeyML - NHL Predictions Via Machine Learning{% endblock %}</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="shortcut icon" href="{% static 'favicons/HMLlogo.jpg' %}/favicon.ico">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-192x192.png' %}" sizes="192x192">
@@ -30,56 +30,53 @@
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Stats <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Goals</a></li>
-                  <li><a href="#">Assists</a></li>
-                  <li><a href="#">Points</a></li>
-                  <li><a href="#">PIM</a></li>
+                  <li>Check back later!</li>
                 </ul>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eastern Conference <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li role="presentation" class="dropdown-header">Atlantic Division</li>
-                  <li><a href="#">Boston Bruins</a></li>
-                  <li><a href="#">Buffalo Sabres</a></li>
-                  <li><a href="#">Detroit Red Wings</a></li>
-                  <li><a href="#">Florida Panthers</a></li>
-                  <li><a href="#">Montreal Canadiens</a></li>
-                  <li><a href="#">Ottawa Senators</a></li>
-                  <li><a href="#">Tampa Bay Lightning</a></li>
-                  <li><a href="#">Toronto Maple Leafs</a></li>
+                  <li><a href="{% url 'team_detail' team='BOS' %}">Boston Bruins</a></li>
+                  <li><a href="{% url 'team_detail' team='BUF' %}">Buffalo Sabres</a></li>
+                  <li><a href="{% url 'team_detail' team='DET' %}">Detroit Red Wings</a></li>
+                  <li><a href="{% url 'team_detail' team='FLA' %}">Florida Panthers</a></li>
+                  <li><a href="{% url 'team_detail' team='MTL' %}">Montreal Canadiens</a></li>
+                  <li><a href="{% url 'team_detail' team='OTT' %}">Ottawa Senators</a></li>
+                  <li><a href="{% url 'team_detail' team='TBL' %}">Tampa Bay Lightning</a></li>
+                  <li><a href="{% url 'team_detail' team='TOR' %}">Toronto Maple Leafs</a></li>
                   <li class="divider"></li>
                   <li role="presentation" class="dropdown-header">Metropolitan Division</li>
-                  <li><a href="#">Carolina Hurricanes</a></li>
-                  <li><a href="#">Columbus Blue Jackets</a></li>
-                  <li><a href="#">New Jersey Devils</a></li>
-                  <li><a href="#">New York Islanders</a></li>
-                  <li><a href="#">New York Rangers</a></li>
-                  <li><a href="#">Philadelphia Flyers</a></li>
-                  <li><a href="#">Pittsburgh Penguins</a></li>
-                  <li><a href="#">Washington Capitals</a></li>
+                  <li><a href="{% url 'team_detail' team='CAR' %}">Carolina Hurricanes</a></li>
+                  <li><a href="{% url 'team_detail' team='CBJ' %}">Columbus Blue Jackets</a></li>
+                  <li><a href="{% url 'team_detail' team='NJD' %}">New Jersey Devils</a></li>
+                  <li><a href="{% url 'team_detail' team='NYI' %}">New York Islanders</a></li>
+                  <li><a href="{% url 'team_detail' team='NYR' %}">New York Rangers</a></li>
+                  <li><a href="{% url 'team_detail' team='PHI' %}">Philadelphia Flyers</a></li>
+                  <li><a href="{% url 'team_detail' team='PIT' %}">Pittsburgh Penguins</a></li>
+                  <li><a href="{% url 'team_detail' team='WSH' %}">Washington Capitals</a></li>
                 </ul>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Western Conference <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li role="presentation" class="dropdown-header">Central Division</li>
-                  <li><a href="#">Chicago Blackhawks</a></li>
-                  <li><a href="#">Colorado Avalanche</a></li>
-                  <li><a href="#">Dallas Stars</a></li>
-                  <li><a href="#">Minnesota Wild</a></li>
-                  <li><a href="#">Nashville Predators</a></li>
-                  <li><a href="#">St. Louis Blues</a></li>
-                  <li><a href="#">Winnepeg Jets</a></li>
+                  <li><a href="{% url 'team_detail' team='CHI' %}">Chicago Blackhawks</a></li>
+                  <li><a href="{% url 'team_detail' team='COL' %}">Colorado Avalanche</a></li>
+                  <li><a href="{% url 'team_detail' team='DAL' %}">Dallas Stars</a></li>
+                  <li><a href="{% url 'team_detail' team='MIN' %}">Minnesota Wild</a></li>
+                  <li><a href="{% url 'team_detail' team='NSH' %}">Nashville Predators</a></li>
+                  <li><a href="{% url 'team_detail' team='STL' %}">St. Louis Blues</a></li>
+                  <li><a href="{% url 'team_detail' team='WPG' %}">Winnepeg Jets</a></li>
                   <li class="divider"></li>
                   <li role="presentation" class="dropdown-header">Pacific Division</li>
-                  <li><a href="#">Anaheim Ducks</a></li>
-                  <li><a href="#">Arizona Coyotes</a></li>
-                  <li><a href="#">Calgary Flames</a></li>
-                  <li><a href="#">Edmonton Oilers</a></li>
-                  <li><a href="#">Los Angeles Kings</a></li>
-                  <li><a href="#">San Jose Sharks</a></li>
-                  <li><a href="#">Vancouver Canucks</a></li>
+                  <li><a href="{% url 'team_detail' team='ANA' %}">Anaheim Ducks</a></li>
+                  <li><a href="{% url 'team_detail' team='ARI' %}">Arizona Coyotes</a></li>
+                  <li><a href="{% url 'team_detail' team='CGY' %}">Calgary Flames</a></li>
+                  <li><a href="{% url 'team_detail' team='EDM' %}">Edmonton Oilers</a></li>
+                  <li><a href="{% url 'team_detail' team='LAK' %}">Los Angeles Kings</a></li>
+                  <li><a href="{% url 'team_detail' team='SJS' %}">San Jose Sharks</a></li>
+                  <li><a href="{% url 'team_detail' team='VAN' %}">Vancouver Canucks</a></li>
                 </ul>
               </li>
             </ul>

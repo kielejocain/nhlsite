@@ -5,6 +5,7 @@ from home import views
 import player.views
 import search.views
 import stats.views
+import team.views
 
 urlpatterns = patterns('',
     # Examples:
@@ -19,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^player/(?P<pk>\d{7})', player.views.DetailSkaterView.as_view(),
         name="player_detail"),
     url(r'^stat/goal|Goal', stats.views.goals, name="goal_detail"),
+    url(r'^team/(?P<team>\w{3})', team.views.DetailTeamView.as_view(), name="team_detail"),
 )
 
 urlpatterns += staticfiles_urlpatterns()

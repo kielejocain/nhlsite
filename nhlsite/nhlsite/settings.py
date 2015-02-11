@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'home',
     'player',
     'stat',
+    'team',
 )
 
 MIDDLEWARE_CLASSES = (
