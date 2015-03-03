@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Method</h1>
+
+<p>Broadly, our method is as follows:</p>
+
+<ol>
+    <li>Shape the data</li>
+    <li>Factor analysis</li>
+    <li>Preliminary models</li>
+    <li>Model ensembling</li>
+    <li>Model testing</li>
+</ol>
+
+<h3>Shape the data</h3>
+
+<p>Before analysis can begin, we need a clean, functional set of data.  This entails converting many of the statistics
+    to per-game numbers, stripping out the seasons that won't enter the model, and converting each remaining player
+    to a single observation with several seasons' data.</p>
+
+<h3>Factor Analysis</h3>
+
+<p>We begin by building several random forest models on all potential predictors.  We then look at various importance
+    measures built into R to choose the candidate set of factors from the full pool.  This is all automated; the
+    suggested factors and their importance metrics are then analyzed to hand-select the final factor set.</p>
+
+<h3>Preliminary Models</h3>
+
+<p>Having chosen a set of factors, the data is again reshaped down to what is necessary, and models of several types
+    are built.  The models include random forests, and boosting models.</p>
+
+<h3>Model ensembling</h3>
+
+<p>The preliminary models are combined in various ways, looking for a potential meta-model that might reliably
+    outperform the individual basic models.</p>
+
+<h3>Model testing</h3>
+
+<p>Having built several models, we then begin to look at how the models perform outside the training set.  We again
+    reshape the data to predict the same outcome but in a different season.  We also include a naive model that
+    assumes each player will get precisely the same outcome that they got the previous season.  If the models are not
+    performing to standards, we tweak the parameters by which the ensembling took place, the parameters of the
+    preliminary models, and try varying combinations of factors to hone in on the signal.</p>
+
+{% endblock %}

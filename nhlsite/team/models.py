@@ -96,7 +96,7 @@ class Skater(models.Model):
 
 
 class CurrSkaterStats(models.Model):
-    nhl_num = models.ForeignKey(Skater, db_column='nhl_num')
+    nhl_num = models.ForeignKey(Skater, db_column='nhl_num', related_name='pstat')
     season = models.IntegerField(blank=True, null=True)
     team = models.CharField(max_length=3, blank=True)
     team2 = models.CharField(max_length=3, blank=True)
@@ -156,7 +156,7 @@ class CurrSkaterStats(models.Model):
 
 
 class SkaterPredictions(models.Model):
-    nhl_num = models.IntegerField(primary_key=True)
+    nhl_num = models.ForeignKey(Skater, db_column='nhl_num', related_name='ppred')
     games_played = models.FloatField(blank=True, null=True)
     es_toi = models.FloatField(blank=True, null=True)
     sh_toi = models.FloatField(blank=True, null=True)
@@ -188,6 +188,7 @@ class SkaterPredictions(models.Model):
     plus_minus = models.FloatField(blank=True, null=True)
     faceoff_wins = models.FloatField(blank=True, null=True)
     faceoff_losses = models.FloatField(blank=True, null=True)
+    id = models.IntegerField(primary_key=True)
 
     class Meta:
         managed = False

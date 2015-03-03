@@ -19,7 +19,9 @@ urlpatterns = patterns('',
     ),
     url(r'^player/(?P<pk>\d{7})', player.views.DetailSkaterView.as_view(),
         name="player_detail"),
-    url(r'^stat/goal|Goal', stats.views.goals, name="goal_detail"),
+    url(r'^stat/glossary|Glossary', stats.views.glossary, name="glossary"),
+    url(r'^stat/method|Method', stats.views.method, name="method"),
+    url(r'^stat/goals|Goals', stats.views.goals, name="goal_detail"),
     url(r'^team/(?P<team>\w{3})', team.views.DetailTeamView.as_view(), name="team_detail"),
 )
 
