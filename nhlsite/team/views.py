@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.views.generic import ListView
 
-from team.models import CurrSkaterStats
+from team.models import SkaterStats
 
 from itertools import chain
 
@@ -11,7 +11,7 @@ import operator
 
 class DetailTeamView(ListView):
 
-    model = CurrSkaterStats
+    model = SkaterStats
     template_name = 'team/team_detail.html'
 
     def get_context_data(self, **kwargs):
@@ -49,9 +49,10 @@ class DetailTeamView(ListView):
         context = super(DetailTeamView, self).get_context_data(**kwargs)
         context['team'] = self.kwargs['team']
         context['full_team'] = NAMES[context['team']]
-        query1 = CurrSkaterStats.objects.filter(team3=self.kwargs['team']).select_related('nhl_num')
-        query2 = CurrSkaterStats.objects.filter(team3__isnull=True, team2=self.kwargs['team']).select_related('nhl_num')
-        query3 = CurrSkaterStats.objects.filter(team3__isnull=True, team2__isnull=True, team=self.kwargs['team']).select_related('nhl_num')
+        query = SkaterStats.objects.filter(season=2015)
+        query1 = query.filter(team3=self.kwargs['team']).select_related('nhl_num')
+        query2 = query.filter(team3__isnull=True, team2=self.kwargs['team']).select_related('nhl_num')
+        query3 = query.filter(team3__isnull=True, team2__isnull=True, team=self.kwargs['team']).select_related('nhl_num')
         context['skaters'] = chain(query1, query2, query3)
         context['skaters'] = sorted(context['skaters'], key=operator.attrgetter('nhl_num.last_name'))
         context['skaters'] = sorted(context['skaters'], key=operator.attrgetter('games_played'), reverse=True)

@@ -95,7 +95,7 @@ class Skater(models.Model):
                          ])
 
 
-class CurrSkaterStats(models.Model):
+class SkaterStats(models.Model):
     nhl_num = models.ForeignKey(Skater, db_column='nhl_num', related_name='pstat')
     season = models.IntegerField(blank=True, null=True)
     team = models.CharField(max_length=3, blank=True)
@@ -148,7 +148,7 @@ class CurrSkaterStats(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'currskaterstats'
+        db_table = 'skaterstats'
         ordering = ['nhl_num']
         def __str__(self):
             return ' '.join([str(self.nhl_num),
