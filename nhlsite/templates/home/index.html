@@ -2,96 +2,109 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-xs-8 col-md-10">
+    <div class="col-xs-12">
         <h1>Welcome!</h1>
-
         <p>
-            This site is my attempt to bring machine learning algorithms to bear on prediction of NHL fantasy stats.  As
-            you can see, it is quite bare-bones at the moment.
+            This site is my attempt to bring machine learning algorithms to bear on prediction of NHL fantasy stats.  If
+            you'd like more details about the method I'm attempting to employ, see the <a href="{% url 'method' %}">about:method</a>
+            page.  If you'd like to know what features are coming down the pike, see the <a href="{% url 'site' %}">about:site</a>
+            page.
         </p>
-        <h3>What can I do now?</h3>
+        <h3>Where to look</h3>
         <p>
-            Either choose your favorite team from the Conference dropdowns or head up to the Search bar in the top right
-            corner and find some players by last name.  You can see what I've got
-            brewing so far and see how well my predictions are playing out for your favorite players.
-        </p>
-        <p>
-            Also, check back in the coming weeks as I reveal my thought process and approach to modeling various statistics.
-            I'll also give progress on the various features in the bars to the right, so you have some idea of when to
-            expect various updates.
-        </p>
-        <h3>What are your future plans for the site?</h3>
-        <p>
-            Over the remainder of the current season, I have plans to add several features to the site, firstly including
-            improved navigation.  The "Conference" dropdowns above <del datetime="2015-02-10">will soon</del> now point to individual team pages, which will have
-            up-to-date rosters with links to individual player pages.  These pages will also eventually have cumulative
-            stats pages and base predictions folded in.
+            If you have a favorite team, use the "Conference" dropdown lists above.  If you're curious about a particular
+            player, enter all or part of their last name in the search box above (note: I only have players that played at
+            least one season since 1997-1998, and only predict for players that played last season; the model has
+            nothing to say about how Gretzky would fair in today's NHL).  If you'd like to know more about the
+            specifics of the model, check the "Stats" dropdown to
+            see features of the algorithms for specific stats (as I make them).  If you know nothing at all about hockey,
+            take a gander at the <a href="{% url 'glossary' %}">glossary</a> page to learn about basic hockey definitions,
+            then come back here and try one of the players from the 2015 All-Star rosters to see an example of a good
+            player's numbers.
         </p>
         <p>
-            The "Stats" dropdown will eventually include in-depth discussions on each of the major stats categories,
-            including factor analysis and predicted and current leaderboards in each category.
+            Thanks for visiting!
         </p>
-        <p>
-            At the moment I don't have the goalie model fully implemented, nor do I have predictions for players that didn't
-            play the last two NHL seasons.  These are major holes to be sure, and are my next two major content objectives.
-        </p>
-        <p>
-            Finally, once the front page doesn't need to spend as much energy explaining how the site works, I'll replace
-            the front page with mini leaderboards for each stat, giving you quick access to the most prolific players in
-            the major categories.
-        </p>
-        <p>
-            Once all this is done, I'd like to rework my model with more specific data, which will require a massive rewrite
-            of my scraping algorithm.  Hopefully this will lead to even more accurate models as I can begin to account for
-            changing team composition and get a more accurate estimate of games played.
-        </p>
-        <p>
-            My most ambitious goal is to create a graphical drafting interface that uses the predictions to assist in a
-            fantasy draft.
-        </p>
-        <h3>What tools did you use to build the model/site?</h3>
-        <p>
-            Broadly: Python (and Scrapy), PostgreSQL, bash scripts, R (including the caret package), Django, CSS
-            Bootstrap, and AWS.
-        </p>
-    </div>
-    <div class="col-xs-4 col-md-2">
-        <h2>To Do:</h2>
-        <h3>Team Pages</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 80%;">
-                80%
-            </div>
-        </div>
-        <h3>Stats Pages</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 2%;">
-                <span class="sr-only">0%</span>
-            </div>
-        </div>
-        <h3>Goalies</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 2%;">
-                <span class="sr-only">0%</span>
-            </div>
-        </div>
-        <h3>Full Model</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 30%;">
-                30%
-            </div>
-        </div>
-        <h3>Leaderboards</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 2%;">
-                <span class="sr-only">0%</span>
-            </div>
-        </div>
-        <h3>Better Data</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 2%;">
-                <span class="sr-only">0%</span>
-            </div>
+        <h3>2015 NHL All-Star Game Rosters</h3>
+        <div class="col-md-6">
+            <table class="table table-hover">
+                <tr>
+                    <th>Team Toews</th>
+                    <th>Team Foligno</th>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8473604 %}">Jonathan Toews</a></td>
+                    <td><a href="{% url 'player_detail' pk=8473422 %}">Nick Foligno</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8470612 %}">Ryan Getzlaf</a></td>
+                    <td><a href="{% url 'player_detail' pk=8474141 %}">Patrick Kane</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8470041 %}">Rick Nash</a></td>
+                    <td><a href="{% url 'player_detail' pk=8475793 %}">Ryan Johansen</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8475794 %}">Tyler Seguin</a></td>
+                    <td><a href="{% url 'player_detail' pk=8471685 %}">Anze Kopitar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8474161 %}">Jakub Voracek</a></td>
+                    <td><a href="{% url 'player_detail' pk=8474564 %}">Steven Stamkos</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8475166 %}">John Tavares</a></td>
+                    <td><a href="{% url 'player_detail' pk=8473548 %}">Phil Kessel</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8475765 %}">Vladimir Tarasenko</a></td>
+                    <td><a href="{% url 'player_detail' pk=8473512 %}">Claude Giroux</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8470638 %}">Patrice Bergeron</a></td>
+                    <td><a href="{% url 'player_detail' pk=8471676 %}">Bobby Ryan</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8460542 %}">Patrik Elias</a></td>
+                    <td><a href="{% url 'player_detail' pk=8468085 %}">Radim Vrbata</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8476887 %}">Filip Forsberg</a></td>
+                    <td><a href="{% url 'player_detail' pk=8476878 %}">Zemgus Girgensons</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8476346 %}">Johnny Gaudreau</a></td>
+                    <td><a href="{% url 'player_detail' pk=8471214 %}">Alex Ovechkin</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8470642 %}">Shea Weber</a></td>
+                    <td><a href="{% url 'player_detail' pk=8476454 %}">Ryan Nugent-Hopkins</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8470607 %}">Brent Seabrook</a></td>
+                    <td><a href="{% url 'player_detail' pk=8474563 %}">Drew Doughty</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8477932 %}">Aaron Ekblad</a></td>
+                    <td><a href="{% url 'player_detail' pk=8470281 %}">Duncan Keith</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8470600 %}">Ryan Suter</a></td>
+                    <td><a href="{% url 'player_detail' pk=8470834 %}">Dustin Byfuglien</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8470966 %}">Mark Giordano</a></td>
+                    <td><a href="{% url 'player_detail' pk=8470613 %}">Brent Burns</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'player_detail' pk=8475753 %}">Justin Faulk</a></td>
+                    <td><a href="{% url 'player_detail' pk=8474031 %}">Kevin Shattenkirk</a></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><a href="{% url 'player_detail' pk=8475171 %}">Oliver Ekman-Larsson</a></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

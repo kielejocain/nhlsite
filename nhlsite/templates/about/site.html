@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}HockeyML - About{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-8 col-md-10">
+        <h1>About This Website</h1>
+        <h3>Overview</h3>
+        <p>
+            This site is the result of about a year of learning.  It has been the conduit through which I have learned to
+            use several tools useful to data analysis, including web scraping, data normalization, and machine learning,
+            with a dash of web development and hosting thrown in.
+        </p>
+        <h3>What are your future plans for the site?</h3>
+        <p>
+            Over the remainder of the current season, I have plans to add several features to the site, firstly including
+            improved navigation.  The "Conference" dropdowns above <del datetime="2015-02-10">will soon</del> now point to individual team pages, which will have
+            up-to-date rosters with links to individual player pages.  These pages will also eventually have cumulative
+            stats pages and base predictions folded in.
+        </p>
+        <p>
+            The "Stats" dropdown will eventually include in-depth discussions on each of the major stats categories,
+            including factor analysis and predicted and current leaderboards in each category.
+        </p>
+        <p>
+            I intend to soon add graphical representations of each player's progress toward (or beyond) their predictions,
+            so that each player's page isn't simply a wall o' tables.
+        </p>
+        <p>
+            At the moment I don't have the goalie model fully implemented, nor do I have predictions for players that didn't
+            play last season.  These are major holes to be sure, and are my next two major content objectives.
+        </p>
+        <p>
+            Finally, once the front page doesn't need to spend as much energy explaining how the site works, I'll replace
+            the front page with mini leaderboards for each stat, giving you quick access to the most prolific players in
+            the major categories.
+        </p>
+        <p>
+            Once all this is done, I'd like to rework my model with more specific data, which will require a massive rewrite
+            of my scraping algorithm.  Hopefully this will lead to even more accurate models as I can begin to account for
+            changing team composition and get a more accurate estimate of games played.
+        </p>
+        <p>
+            My most ambitious goal is to create a graphical drafting interface that uses the predictions to assist in a
+            fantasy draft.
+        </p>
+        <h3>What tools did you use to build the model/site?</h3>
+        <p>
+            Broadly: Python (and Scrapy), PostgreSQL, bash scripts, R (including the caret package), Django, CSS
+            Bootstrap, and AWS.
+        </p>
+    </div>
+    <div class="col-xs-4 col-md-2">
+        <h2>To Do:</h2>
+        <h3>Team Pages</h3>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 90%;">
+                90%
+            </div>
+        </div>
+        <h3>Stats Pages</h3>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 20%;">
+                <span class="sr-only">20%</span>
+            </div>
+        </div>
+        <h3>Goalies</h3>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 2%;">
+                <span class="sr-only">0%</span>
+            </div>
+        </div>
+        <h3>Full Model</h3>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 40%;">
+                40%
+            </div>
+        </div>
+        <h3>Leaderboards</h3>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 2%;">
+                <span class="sr-only">0%</span>
+            </div>
+        </div>
+        <h3>Better Data</h3>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 2%;">
+                <span class="sr-only">0%</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

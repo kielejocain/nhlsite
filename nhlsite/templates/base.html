@@ -30,7 +30,8 @@
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Stats <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li>Check back later!</li>
+                    <li><a href="{% url 'glossary' %}">Glossary</a></li>
+                    <li><a>Check back later!</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -77,6 +78,13 @@
                   <li><a href="{% url 'team_detail' team='LAK' %}">Los Angeles Kings</a></li>
                   <li><a href="{% url 'team_detail' team='SJS' %}">San Jose Sharks</a></li>
                   <li><a href="{% url 'team_detail' team='VAN' %}">Vancouver Canucks</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{% url 'site' %}">Site</a></li>
+                    <li><a href="{% url 'method' %}">Method</a></li>
                 </ul>
               </li>
             </ul>
