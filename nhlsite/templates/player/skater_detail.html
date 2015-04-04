@@ -17,6 +17,14 @@
 <p>Undrafted</p>
 {% endif %}
 
+{% if skaterpredictions %}
+<h2>Visual Summary</h2>
+<p>
+    Wide, light background bar represents the model's prediction, while darker thinner bar represents actual stats.
+    Vertical stroke is where the player should be to be on pace for the prediction (based on team's remaining games).
+    Colors represent the situational breakdown (e.g., power play) where applicable.  JavaScript is required.
+</p>
+
 <div id="chart"></div>
 
 <style>
@@ -73,6 +81,13 @@ d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data
 });
 
 </script>
+
+{% else %}
+<h3>Note</h3>
+<p>
+    The model has nothing to say about this player, most likely because they did not play in the previous season.
+</p>
+{% endif %}
 
 <h2>Base Statistics</h2>
 <table class="table table-hover">
