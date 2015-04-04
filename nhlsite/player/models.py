@@ -192,3 +192,18 @@ class SkaterPredictions(models.Model):
     class Meta:
         managed = False
         db_table = 'skatpred15'
+
+
+class Standings(models.Model):
+    team = models.CharField(max_length=3, primary_key=True)
+    division = models.CharField(max_length=1, blank=True, null=True)
+    games_played = models.IntegerField(blank=True, null=True)
+    wins = models.IntegerField(blank=True, null=True)
+    losses = models.IntegerField(blank=True, null=True)
+    ot_losses = models.IntegerField(blank=True, null=True)
+    points = models.IntegerField(blank=True, null=True)
+    row = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'standings'

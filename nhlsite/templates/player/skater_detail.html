@@ -2,6 +2,8 @@
 
 {% load mathfilters %}
 
+{% load static %}
+
 {% block title %}{{ skater }} Statistics - HockeyML{% endblock %}
 
 {% block content %}
@@ -14,6 +16,63 @@
 {% else %}
 <p>Undrafted</p>
 {% endif %}
+
+<div id="chart"></div>
+
+<style>
+
+.bullet { font: 10px sans-serif; }
+.bullet .marker { stroke: #000; stroke-width: 2px; }
+.bullet .tick line { stroke: #666; stroke-width: .5px; }
+.bullet .range.s0 { fill: #ddd; }
+.bullet .range.s1 { fill: #99f; }
+.bullet .range.s2 { fill: #9f9; }
+.bullet .range.s3 { fill: #fa9; }
+.bullet .measure.s0 { fill: #00f; }
+.bullet .measure.s1 { fill: #0f0; }
+.bullet .measure.s2 { fill: #f60; }
+.bullet .title { font-size: 14px; font-weight: bold; }
+.bullet .subtitle { fill: #999; }
+
+</style>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="{% static 'js/bullet.js' %}"></script>
+<script>
+
+var margin = {top: 5, right: 40, bottom: 20, left: 120},
+    width = 960 - margin.left - margin.right,
+    height = 50 - margin.top - margin.bottom;
+
+var chart = d3.bullet()
+    .width(width)
+    .height(height);
+
+d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data) {
+  var svg = d3.select("#chart").selectAll("svg")
+      .data(data)
+    .enter().append("svg")
+      .attr("class", "bullet")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .call(chart);
+
+  var title = svg.append("g")
+      .style("text-anchor", "end")
+      .attr("transform", "translate(-6," + height / 2 + ")");
+
+  title.append("text")
+      .attr("class", "title")
+      .text(function(d) { return d.title; });
+
+  title.append("text")
+      .attr("class", "subtitle")
+      .attr("dy", "1em")
+      .text(function(d) { return d.subtitle; });
+});
+
+</script>
 
 <h2>Base Statistics</h2>
 <table class="table table-hover">

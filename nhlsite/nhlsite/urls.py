@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^about/method', about.views.method, name="method"),
     url(r'^stat/goals', stats.views.goals, name="goal_detail"),
     url(r'^team/(?P<team>\w{3})', team.views.DetailTeamView.as_view(), name="team_detail"),
+    url(r'^api/player_graph/$', player.views.player_graph, name="player_graph")
 )
 
 urlpatterns += staticfiles_urlpatterns()

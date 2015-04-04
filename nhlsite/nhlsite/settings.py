@@ -18,7 +18,7 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mcn711my61@m5tg8!$-#cuu)wjdbr1@lz&=+!t1x@pczbks9un'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -65,9 +65,9 @@ WSGI_APPLICATION = 'nhlsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nhltest',
-        'USER': 'postgres',
-        'PASSWORD': 'hollyleaf',
+        'NAME': os.environ["DB_NAME"],
+        'USER': os.environ["DB_USER"],
+        'PASSWORD': os.environ["DB_PASS"],
         'HOST': 'localhost'
     }
 }
@@ -92,5 +92,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.environ["STATIC"],
 )
