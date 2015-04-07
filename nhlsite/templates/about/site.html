@@ -10,7 +10,7 @@
         <p>
             This site is the result of about a year of learning.  It has been the conduit through which I have learned to
             use several tools useful to data analysis, including web scraping, data normalization, and machine learning,
-            with a dash of web development and hosting thrown in.
+            with a dash of web development and hosting thrown in.  Statistics are updated every night at midnight Pacific.
         </p>
         <h3>What are your future plans for the site?</h3>
         <p>
@@ -24,12 +24,13 @@
             including factor analysis and predicted and current leaderboards in each category.
         </p>
         <p>
-            I intend to soon add graphical representations of each player's progress toward (or beyond) their predictions,
-            so that each player's page isn't simply a wall o' tables.
+            I <del datetime="2015-04-08">intend to soon add</del> have added graphical representations of each player's
+            progress toward (or beyond) their predictions so that each player's page isn't simply a wall o' tables.
         </p>
         <p>
             At the moment I don't have the goalie model fully implemented, nor do I have predictions for players that didn't
-            play last season.  These are major holes to be sure, and are my next two major content objectives.
+            play last season.  These are major holes to be sure.  Goalies are my next major content objective, but rookies
+            are a whole 'nother ball o' wax.
         </p>
         <p>
             Finally, once the front page doesn't need to spend as much energy explaining how the site works, I'll replace
@@ -47,34 +48,37 @@
         </p>
         <h3>What tools did you use to build the model/site?</h3>
         <p>
-            Broadly: Python (and Scrapy), PostgreSQL, bash scripts, R (including the caret package), Django, CSS
-            Bootstrap, and AWS.
+            Broadly: <a href="https://www.python.org/">Python</a> (including <a href="http://scrapy.org/">Scrapy</a>),
+            <a href="http://www.postgresql.org/">PostgreSQL</a>, bash scripts, <a href="http://www.r-project.org/">R</a>
+            (including the <a href="http://topepo.github.io/caret/index.html">caret</a> package),
+            <a href="https://www.djangoproject.com/">Django</a>, <a href="http://getbootstrap.com/">Bootstrap</a>,
+            <a href="https://aws.amazon.com/">AWS</a>, and <a href="d3js.org">D3</a>.
         </p>
     </div>
     <div class="col-xs-4 col-md-2">
         <h2>To Do:</h2>
         <h3>Team Pages</h3>
         <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 90%;">
-                90%
+            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="2" aria-valuemax="100" style="width: 90%;">
+                <span class="sr-only">90%</span>
             </div>
         </div>
         <h3>Stats Pages</h3>
         <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 20%;">
-                <span class="sr-only">20%</span>
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="2" aria-valuemax="100" style="width: 100%;">
+                <span class="sr-only">100%</span>
+            </div>
+        </div>
+        <h3>Full Model</h3>
+        <div class="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="2" aria-valuemax="100" style="width: 100%;">
+                <span class="sr-only">100%</span>
             </div>
         </div>
         <h3>Goalies</h3>
         <div class="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 2%;">
                 <span class="sr-only">0%</span>
-            </div>
-        </div>
-        <h3>Full Model</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 40%;">
-                40%
             </div>
         </div>
         <h3>Leaderboards</h3>

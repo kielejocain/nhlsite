@@ -78,8 +78,8 @@ def player_graph(request):
         {
             'title': 'Shots',
             'subtitle': '',
-            'ranges': [0, preds.shots, 0, 500],
-            'measures': [0, stats.shots, 0],
+            'ranges': [0, preds.shots, preds.shots, 500],
+            'measures': [0, stats.shots, stats.shots],
             'markers': [preds.shots * team.games_played / 82]
         },
         {
