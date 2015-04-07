@@ -191,7 +191,7 @@ class SkaterPredictions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'skatpred15'
+        db_table = 'newskatpred15'
 
 
 class Standings(models.Model):

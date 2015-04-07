@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<h1>{{ skater }}</h1>
+<h1>{{ skater }}{% if team %} - <a href="{% url 'team_detail' team=team %}">{{ team }}</a>{% endif %}</h1>
 
 <p>DOB: {{ skater.birthday }}</p>
 {% if skater.draft_position %}
@@ -20,9 +20,10 @@
 {% if skaterpredictions %}
 <h2>Visual Summary</h2>
 <p>
-    Wide, light background bar represents the model's prediction, while darker thinner bar represents actual stats.
-    Vertical stroke is where the player should be to be on pace for the prediction (based on team's remaining games).
-    Colors represent the situational breakdown (e.g., power play) where applicable.  JavaScript is required.
+    The wide, light background bar represents the model's prediction, while the darker thinner bar reflects actual stats.
+    The vertical stroke shows where the player should be to match pace for the prediction (based on the team's remaining games).
+    Stats with the 'SH / ES / PP' notation are broken down situationally by color (orange = SH, green = ES, blue = PP).
+    Penalty Minutes are broken down into misconducts, majors, and minors. JavaScript is required.
 </p>
 
 <div id="chart"></div>
