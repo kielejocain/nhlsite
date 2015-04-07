@@ -80,7 +80,7 @@ def player_graph(request):
                 'title':'TOI/Game',
                 'subtitle':'SH / ES / PP',
                 'ranges':[preds.sh_toi/(60*preds.games_played),(preds.sh_toi+preds.es_toi)/(60*preds.games_played),preds.toi/(60*preds.games_played),30],
-                'measures':[stats.sh_toi/(60*stats.games_played),(stats.sh_toi+stats.es_toi)/(60*stats.games_played),preds.toi/(60*stats.games_played)],
+                'measures':[stats.sh_toi/(60*stats.games_played),(stats.sh_toi+stats.es_toi)/(60*stats.games_played),stats.toi/(60*stats.games_played)],
                 'markers':[preds.toi/(60*preds.games_played)]}
         ]
     return JsonResponse(data, safe=False)
