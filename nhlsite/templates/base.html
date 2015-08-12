@@ -4,15 +4,111 @@
     <title>{% block title %}HockeyML - NHL Predictions Via Machine Learning{% endblock %}</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
     <link rel="shortcut icon" href="{% static 'favicons/HMLlogo.jpg' %}/favicon.ico">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-192x192.png' %}" sizes="192x192">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-160x160.png' %}" sizes="160x160">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-96x96.png' %}" sizes="96x96">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-16x16.png' %}" sizes="16x16">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-32x32.png' %}" sizes="32x32">
+    <link href='http://fonts.googleapis.com/css?family=Oswald|Share+Tech+Mono|Karla' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+    <style>
+        body {
+            font-family: "Karla", sans-serif;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: "Oswald", sans-serif;
+        }
+
+        .data {
+            font-family: "Share Tech Mono", monospace;
+        }
+
+        .container {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .jumbotron {
+            width: 100%;
+        }
+
+        .jumbotron img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        nav>div {
+            background-color: #FFF355;
+            display: inline-block;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .nav_wrap {
+            margin: 15px auto 0px;
+        }
+
+        .nav_wrap li a {
+            font-family: "Oswald", sans-serif;
+            font-size: 20px
+        }
+
+        .nav_wrap ul {
+            list-style: none;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav_wrap ul a {
+            display: block;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 0 15px;
+            font-family: "Karla", sans-serif;
+        }
+
+        .nav_wrap ul li {
+            position: relative;
+            float: left;
+            margin: 0;
+            padding: 0 5px;
+            font-family: "Oswald", sans-serif;
+        }
+
+        .nav_wrap ul li:hover {
+            background: #f6f6f6
+        }
+
+        .nav_wrap ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            padding: 0
+        }
+
+        .nav_wrap ul ul li {
+            float: none;
+            width: 200px
+        }
+
+        .nav_wrap ul li:hover > ul {
+            display: block;
+        }
+
+        .search {
+            position: relative;
+            float: right;
+            margin-top: 5px;
+        }
+    </style>
   </head>
 
   <body>
@@ -21,23 +117,21 @@
         <img src="{% static 'images/HMLlogo.jpg' %}"/>
         <h3>Machine learning algorithms to predict NHL fantasy statistics</h3>
       </div>
-      <nav class="navbar navbar-default">
-        <div style="background-color:FFF355">
-         <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span></a></li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Stats <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
+      <nav class="nav_wrap">
+          <div>
+            <ul>
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li>
+                <a>Stats</a>
+                <ul>
                     <li><a href="{% url 'glossary' %}">Glossary</a></li>
                     <li><a>Check back later!</a></li>
                 </ul>
               </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eastern Conference <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" class="dropdown-header">Atlantic Division</li>
+              <li>
+                <a>Eastern Conference</a>
+                <ul>
+                  <li>Atlantic Division</li>
                   <li><a href="{% url 'team_detail' team='BOS' %}">Boston Bruins</a></li>
                   <li><a href="{% url 'team_detail' team='BUF' %}">Buffalo Sabres</a></li>
                   <li><a href="{% url 'team_detail' team='DET' %}">Detroit Red Wings</a></li>
@@ -46,7 +140,7 @@
                   <li><a href="{% url 'team_detail' team='OTT' %}">Ottawa Senators</a></li>
                   <li><a href="{% url 'team_detail' team='TBL' %}">Tampa Bay Lightning</a></li>
                   <li><a href="{% url 'team_detail' team='TOR' %}">Toronto Maple Leafs</a></li>
-                  <li class="divider"></li>
+                  <li></li>
                   <li role="presentation" class="dropdown-header">Metropolitan Division</li>
                   <li><a href="{% url 'team_detail' team='CAR' %}">Carolina Hurricanes</a></li>
                   <li><a href="{% url 'team_detail' team='CBJ' %}">Columbus Blue Jackets</a></li>
@@ -58,10 +152,10 @@
                   <li><a href="{% url 'team_detail' team='WSH' %}">Washington Capitals</a></li>
                 </ul>
               </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Western Conference <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" class="dropdown-header">Central Division</li>
+              <li>
+                <a>Western Conference</a>
+                <ul>
+                  <li>Central Division</li>
                   <li><a href="{% url 'team_detail' team='CHI' %}">Chicago Blackhawks</a></li>
                   <li><a href="{% url 'team_detail' team='COL' %}">Colorado Avalanche</a></li>
                   <li><a href="{% url 'team_detail' team='DAL' %}">Dallas Stars</a></li>
@@ -69,7 +163,7 @@
                   <li><a href="{% url 'team_detail' team='NSH' %}">Nashville Predators</a></li>
                   <li><a href="{% url 'team_detail' team='STL' %}">St. Louis Blues</a></li>
                   <li><a href="{% url 'team_detail' team='WPG' %}">Winnepeg Jets</a></li>
-                  <li class="divider"></li>
+                  <li></li>
                   <li role="presentation" class="dropdown-header">Pacific Division</li>
                   <li><a href="{% url 'team_detail' team='ANA' %}">Anaheim Ducks</a></li>
                   <li><a href="{% url 'team_detail' team='ARI' %}">Arizona Coyotes</a></li>
@@ -80,23 +174,22 @@
                   <li><a href="{% url 'team_detail' team='VAN' %}">Vancouver Canucks</a></li>
                 </ul>
               </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
+              <li>
+                <a>About</a>
+                <ul>
                     <li><a href="{% url 'site' %}">Site</a></li>
                     <li><a href="{% url 'method' %}">Method</a></li>
                 </ul>
               </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-            <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
-              <div class="form-group">
-                <input type="text" class="form-control" name="q" id="id_q" value="{{ query }}" placeholder="Search by last name">
+            <ul>
+            <form role="search" action="{% url 'search' %}">
+              <div class="search">
+                <input type="text" name="q" id="id_q" value="{{ query }}" placeholder="Search by last name">
+                <button type="submit">Submit</button>
               </div>
-              <button type="submit" class="btn btn-default">Submit</button>
             </form>
             </ul>
-          </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
       <div>

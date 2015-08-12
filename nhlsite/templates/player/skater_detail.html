@@ -30,7 +30,7 @@
 
 <style>
 
-.bullet { font: 10px sans-serif; }
+.bullet { font: 10px "Oswald", sans-serif; }
 .bullet .marker { stroke: #000; stroke-width: 2px; }
 .bullet .tick line { stroke: #666; stroke-width: .5px; }
 .bullet .range.s0 { fill: #ddd; }
@@ -91,7 +91,7 @@ d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data
 {% endif %}
 
 <h2>Base Statistics</h2>
-<table class="table table-hover">
+<table class="data">
     <tr>
         <th>Season</th>
         <th title="Games Played">GP</th>
@@ -138,7 +138,7 @@ d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data
 </table>
 
 <h2>Situational Statistics</h2>
-<table class="table table-hover">
+<table class="data">
     <tr>
         <th></th>
         <th colspan="3">Time On Ice Per Game</th>
