@@ -17,6 +17,7 @@
     <style>
         body {
             font-family: "Karla", sans-serif;
+            background-color: #EEE;
         }
 
         h1, h2, h3, h4 {
@@ -38,12 +39,18 @@
 
         .jumbotron img {
             display: block;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+        }
+
+        .jumbotron h2 {
+            display: block;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
         }
 
         nav>div {
-            background-color: #FFF355;
+            background-color: #94B5C2;
             display: inline-block;
             border-radius: 5px;
             width: 100%;
@@ -53,21 +60,27 @@
             margin: 15px auto 0px;
         }
 
+        .nav_wrap ul {
+            list-style: none;
+            display: inline-block;
+            font-family: "Oswald", sans-serif;
+            color: #0048A4;
+            margin: auto;
+            padding: 0;
+        }
+
+        .nav_wrap ul a:visited {
+            color: #0048A4;
+        }
+
         .nav_wrap li a {
             font-family: "Oswald", sans-serif;
             font-size: 20px
         }
 
-        .nav_wrap ul {
-            list-style: none;
-            display: inline-block;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav_wrap ul a {
+        .nav_wrap ul ul a {
             display: block;
-            text-decoration: none;
+            color: #0048A4;
             font-size: 16px;
             padding: 0 15px;
             font-family: "Karla", sans-serif;
@@ -77,12 +90,12 @@
             position: relative;
             float: left;
             margin: 0;
-            padding: 0 5px;
+            padding: 6px 10px;
             font-family: "Oswald", sans-serif;
         }
 
         .nav_wrap ul li:hover {
-            background: #f6f6f6
+            background: #ccc;
         }
 
         .nav_wrap ul ul {
@@ -90,7 +103,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background: #fff;
+            background: #94B5C2;
             padding: 0
         }
 
@@ -103,10 +116,23 @@
             display: block;
         }
 
-        .search {
+        form.search {
             position: relative;
+            clear: both;
             float: right;
-            margin-top: 5px;
+            margin: 5px 0 0 0;
+            padding-top: 3px;
+        }
+
+        .search input {
+          font-family: "Karla", sans-serif;
+          font-size: 16px;
+        }
+
+        .search button {
+          font-family: "Karla", sans-serif;
+          font-size: 16px;
+          margin-right: 10px;
         }
     </style>
   </head>
@@ -115,7 +141,7 @@
     <div class="container">
       <div class="jumbotron">
         <img src="{% static 'images/HMLlogo.jpg' %}"/>
-        <h3>Machine learning algorithms to predict NHL fantasy statistics</h3>
+        <h2>Machine learning algorithms to predict NHL fantasy statistics</h2>
       </div>
       <nav class="nav_wrap">
           <div>
@@ -129,7 +155,7 @@
                 </ul>
               </li>
               <li>
-                <a>Eastern Conference</a>
+                <a>Eastern Conf</a>
                 <ul>
                   <li>Atlantic Division</li>
                   <li><a href="{% url 'team_detail' team='BOS' %}">Boston Bruins</a></li>
@@ -153,7 +179,7 @@
                 </ul>
               </li>
               <li>
-                <a>Western Conference</a>
+                <a>Western Conf</a>
                 <ul>
                   <li>Central Division</li>
                   <li><a href="{% url 'team_detail' team='CHI' %}">Chicago Blackhawks</a></li>
@@ -182,14 +208,12 @@
                 </ul>
               </li>
             </ul>
-            <ul>
-            <form role="search" action="{% url 'search' %}">
-              <div class="search">
+            <form class="search" role="search" action="{% url 'search' %}">
+              <div>
                 <input type="text" name="q" id="id_q" value="{{ query }}" placeholder="Search by last name">
                 <button type="submit">Submit</button>
               </div>
             </form>
-            </ul>
         </div><!-- /.container-fluid -->
       </nav>
       <div>
