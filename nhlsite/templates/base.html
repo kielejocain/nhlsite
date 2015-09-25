@@ -4,105 +4,97 @@
     <title>{% block title %}HockeyML - NHL Predictions Via Machine Learning{% endblock %}</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="{% static 'favicons/HMLlogo.jpg' %}/favicon.ico">
+    <link rel="shortcut icon" href="{% static 'favicons/favicon.ico' %}">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-192x192.png' %}" sizes="192x192">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-160x160.png' %}" sizes="160x160">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-96x96.png' %}" sizes="96x96">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-16x16.png' %}" sizes="16x16">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-32x32.png' %}" sizes="32x32">
+    <link href='http://fonts.googleapis.com/css?family=Oswald|Share+Tech+Mono|Karla' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/base-style.css' %}" rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   </head>
-
   <body>
     <div class="container">
       <div class="jumbotron">
         <img src="{% static 'images/HMLlogo.jpg' %}"/>
-        <h3>Machine learning algorithms to predict NHL fantasy statistics</h3>
+        <h2>Machine learning algorithms to predict NHL fantasy statistics</h2>
       </div>
-      <nav class="navbar navbar-default">
-        <div style="background-color:FFF355">
-         <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span></a></li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Stats <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="{% url 'glossary' %}">Glossary</a></li>
-                    <li><a>Check back later!</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eastern Conference <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" class="dropdown-header">Atlantic Division</li>
-                  <li><a href="{% url 'team_detail' team='BOS' %}">Boston Bruins</a></li>
-                  <li><a href="{% url 'team_detail' team='BUF' %}">Buffalo Sabres</a></li>
-                  <li><a href="{% url 'team_detail' team='DET' %}">Detroit Red Wings</a></li>
-                  <li><a href="{% url 'team_detail' team='FLA' %}">Florida Panthers</a></li>
-                  <li><a href="{% url 'team_detail' team='MTL' %}">Montreal Canadiens</a></li>
-                  <li><a href="{% url 'team_detail' team='OTT' %}">Ottawa Senators</a></li>
-                  <li><a href="{% url 'team_detail' team='TBL' %}">Tampa Bay Lightning</a></li>
-                  <li><a href="{% url 'team_detail' team='TOR' %}">Toronto Maple Leafs</a></li>
-                  <li class="divider"></li>
-                  <li role="presentation" class="dropdown-header">Metropolitan Division</li>
-                  <li><a href="{% url 'team_detail' team='CAR' %}">Carolina Hurricanes</a></li>
-                  <li><a href="{% url 'team_detail' team='CBJ' %}">Columbus Blue Jackets</a></li>
-                  <li><a href="{% url 'team_detail' team='NJD' %}">New Jersey Devils</a></li>
-                  <li><a href="{% url 'team_detail' team='NYI' %}">New York Islanders</a></li>
-                  <li><a href="{% url 'team_detail' team='NYR' %}">New York Rangers</a></li>
-                  <li><a href="{% url 'team_detail' team='PHI' %}">Philadelphia Flyers</a></li>
-                  <li><a href="{% url 'team_detail' team='PIT' %}">Pittsburgh Penguins</a></li>
-                  <li><a href="{% url 'team_detail' team='WSH' %}">Washington Capitals</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Western Conference <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" class="dropdown-header">Central Division</li>
-                  <li><a href="{% url 'team_detail' team='CHI' %}">Chicago Blackhawks</a></li>
-                  <li><a href="{% url 'team_detail' team='COL' %}">Colorado Avalanche</a></li>
-                  <li><a href="{% url 'team_detail' team='DAL' %}">Dallas Stars</a></li>
-                  <li><a href="{% url 'team_detail' team='MIN' %}">Minnesota Wild</a></li>
-                  <li><a href="{% url 'team_detail' team='NSH' %}">Nashville Predators</a></li>
-                  <li><a href="{% url 'team_detail' team='STL' %}">St. Louis Blues</a></li>
-                  <li><a href="{% url 'team_detail' team='WPG' %}">Winnepeg Jets</a></li>
-                  <li class="divider"></li>
-                  <li role="presentation" class="dropdown-header">Pacific Division</li>
-                  <li><a href="{% url 'team_detail' team='ANA' %}">Anaheim Ducks</a></li>
-                  <li><a href="{% url 'team_detail' team='ARI' %}">Arizona Coyotes</a></li>
-                  <li><a href="{% url 'team_detail' team='CGY' %}">Calgary Flames</a></li>
-                  <li><a href="{% url 'team_detail' team='EDM' %}">Edmonton Oilers</a></li>
-                  <li><a href="{% url 'team_detail' team='LAK' %}">Los Angeles Kings</a></li>
-                  <li><a href="{% url 'team_detail' team='SJS' %}">San Jose Sharks</a></li>
-                  <li><a href="{% url 'team_detail' team='VAN' %}">Vancouver Canucks</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="{% url 'site' %}">Site</a></li>
-                    <li><a href="{% url 'method' %}">Method</a></li>
-                </ul>
-              </li>
+      <nav>
+        <ul>
+          <li><a href="{% url 'home' %}"><span>Home</span></a></li>
+          <li>
+            <span>Stats</span>
+            <ul>
+                <li><a href="{% url 'glossary' %}">Glossary</a></li>
+                <li><a href="#">Check back later!</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-            <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
-              <div class="form-group">
-                <input type="text" class="form-control" name="q" id="id_q" value="{{ query }}" placeholder="Search by last name">
-              </div>
-              <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+          </li>
+          <li>
+            <span>Eastern</span>
+            <ul>
+              <li><span>Atlantic Division</span></li>
+              <li><a href="{% url 'team_detail' team='BOS' %}">Boston Bruins</a></li>
+              <li><a href="{% url 'team_detail' team='BUF' %}">Buffalo Sabres</a></li>
+              <li><a href="{% url 'team_detail' team='DET' %}">Detroit Red Wings</a></li>
+              <li><a href="{% url 'team_detail' team='FLA' %}">Florida Panthers</a></li>
+              <li><a href="{% url 'team_detail' team='MTL' %}">Montreal Canadiens</a></li>
+              <li><a href="{% url 'team_detail' team='OTT' %}">Ottawa Senators</a></li>
+              <li><a href="{% url 'team_detail' team='TBL' %}">Tampa Bay Lightning</a></li>
+              <li><a href="{% url 'team_detail' team='TOR' %}">Toronto Maple Leafs</a></li>
+              <li><span>&nbsp;</span></li>
+              <li><span>Metropolitan Division</span></li>
+              <li><a href="{% url 'team_detail' team='CAR' %}">Carolina Hurricanes</a></li>
+              <li><a href="{% url 'team_detail' team='CBJ' %}">Columbus Blue Jackets</a></li>
+              <li><a href="{% url 'team_detail' team='NJD' %}">New Jersey Devils</a></li>
+              <li><a href="{% url 'team_detail' team='NYI' %}">New York Islanders</a></li>
+              <li><a href="{% url 'team_detail' team='NYR' %}">New York Rangers</a></li>
+              <li><a href="{% url 'team_detail' team='PHI' %}">Philadelphia Flyers</a></li>
+              <li><a href="{% url 'team_detail' team='PIT' %}">Pittsburgh Penguins</a></li>
+              <li><a href="{% url 'team_detail' team='WSH' %}">Washington Capitals</a></li>
             </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+          </li>
+          <li>
+            <span>Western</span>
+            <ul>
+              <li><span>Central Division</span></li>
+              <li><a href="{% url 'team_detail' team='CHI' %}">Chicago Blackhawks</a></li>
+              <li><a href="{% url 'team_detail' team='COL' %}">Colorado Avalanche</a></li>
+              <li><a href="{% url 'team_detail' team='DAL' %}">Dallas Stars</a></li>
+              <li><a href="{% url 'team_detail' team='MIN' %}">Minnesota Wild</a></li>
+              <li><a href="{% url 'team_detail' team='NSH' %}">Nashville Predators</a></li>
+              <li><a href="{% url 'team_detail' team='STL' %}">St. Louis Blues</a></li>
+              <li><a href="{% url 'team_detail' team='WPG' %}">Winnepeg Jets</a></li>
+              <li><span>&nbsp;</span></li>
+              <li><span>Pacific Division</span></li>
+              <li><a href="{% url 'team_detail' team='ANA' %}">Anaheim Ducks</a></li>
+              <li><a href="{% url 'team_detail' team='ARI' %}">Arizona Coyotes</a></li>
+              <li><a href="{% url 'team_detail' team='CGY' %}">Calgary Flames</a></li>
+              <li><a href="{% url 'team_detail' team='EDM' %}">Edmonton Oilers</a></li>
+              <li><a href="{% url 'team_detail' team='LAK' %}">Los Angeles Kings</a></li>
+              <li><a href="{% url 'team_detail' team='SJS' %}">San Jose Sharks</a></li>
+              <li><a href="{% url 'team_detail' team='VAN' %}">Vancouver Canucks</a></li>
+            </ul>
+          </li>
+          <li>
+            <span>About</span>
+            <ul>
+                <li><a href="{% url 'site' %}">Site</a></li>
+                <li><a href="{% url 'method' %}">Method</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="search" role="search" action="{% url 'search' %}">
+          <div>
+            <input type="text" name="q" id="id_q" value="{{ query }}" placeholder="Search by last name">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
       </nav>
-      <div>
+      <main>
         {% block content %}
         {% endblock %}
-      </div>
+      </main>
     </div>
   </body>
 </html>

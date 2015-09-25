@@ -7,58 +7,68 @@
 {% block content %}
 
 <h1>{{ full_team }}</h1>
-
-<table class="table table-hover">
-    <tr>
-        <th>Forwards</th>
-        <th></th>
-        <th colspan="4">2015 Season</th>
-    </tr>
-    <tr>
-        <th>Player</th>
-        <th title="Date of Birth">DOB</th>
-        <th title="Games Played">GP</th>
-        <th title="Goals">G</th>
-        <th title="Assists">A</th>
-        <th title="Points">P</th>
-    </tr>
-    {% for skater in skaters %}
-    {% if skater.nhl_num.player_position != 'D' %}
-    <tr>
-        <td><a href="{% url 'player_detail' pk=skater.nhl_num.nhl_num %}">{{ skater.nhl_num }}</a></td>
-        <td>{{ skater.nhl_num.birthday }}</td>
-        <td>{{ skater.games_played }}</td>
-        <td>{{ skater.goals }}</td>
-        <td>{{ skater.assists }}</td>
-        <td>{{ skater.points }}</td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-    <tr>
-        <th>Defensemen</th>
-        <th></th>
-        <th colspan="4">2015 Season</th>
-    </tr>
-    <tr>
-        <th>Player</th>
-        <th title="Games Played">GP</th>
-        <th title="Date of Birth">DOB</th>
-        <th title="Goals">G</th>
-        <th title="Assists">A</th>
-        <th title="Points">P</th>
-    </tr>
-    {% for skater in skaters %}
-    {% if skater.nhl_num.player_position == 'D' %}
-    <tr>
-        <td><a href="{% url 'player_detail' pk=skater.nhl_num.nhl_num %}">{{ skater.nhl_num }}</a></td>
-        <td>{{ skater.nhl_num.birthday }}</td>
-        <td>{{ skater.games_played }}</td>
-        <td>{{ skater.goals }}</td>
-        <td>{{ skater.assists }}</td>
-        <td>{{ skater.points }}</td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-</table>
+<section>
+    <h3>Current Roster</h3>
+    <table class="data">
+        <thead>
+            <tr>
+                <th>Forwards</th>
+                <th></th>
+                <th colspan="4">2015 Season</th>
+            </tr>
+            <tr>
+                <th>Player</th>
+                <th title="Date of Birth">DOB</th>
+                <th title="Games Played">GP</th>
+                <th title="Goals">G</th>
+                <th title="Assists">A</th>
+                <th title="Points">P</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for skater in skaters %}
+            {% if skater.nhl_num.player_position != 'D' %}
+            <tr>
+                <td><a href="{% url 'player_detail' pk=skater.nhl_num.nhl_num %}">{{ skater.nhl_num }}</a></td>
+                <td>{{ skater.nhl_num.birthday }}</td>
+                <td>{{ skater.games_played }}</td>
+                <td>{{ skater.goals }}</td>
+                <td>{{ skater.assists }}</td>
+                <td>{{ skater.points }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+        <thead>
+            <tr>
+                <th>Defensemen</th>
+                <th></th>
+                <th colspan="4">2015 Season</th>
+            </tr>
+            <tr>
+                <th>Player</th>
+                <th title="Date of Birth">DOB</th>
+                <th title="Games Played">GP</th>
+                <th title="Goals">G</th>
+                <th title="Assists">A</th>
+                <th title="Points">P</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for skater in skaters %}
+            {% if skater.nhl_num.player_position == 'D' %}
+            <tr>
+                <td><a href="{% url 'player_detail' pk=skater.nhl_num.nhl_num %}">{{ skater.nhl_num }}</a></td>
+                <td>{{ skater.nhl_num.birthday }}</td>
+                <td>{{ skater.games_played }}</td>
+                <td>{{ skater.goals }}</td>
+                <td>{{ skater.assists }}</td>
+                <td>{{ skater.points }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
 
 {% endblock %}
