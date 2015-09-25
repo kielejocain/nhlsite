@@ -4,7 +4,7 @@
     <title>{% block title %}HockeyML - NHL Predictions Via Machine Learning{% endblock %}</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <link rel="shortcut icon" href="{% static 'favicons/HMLlogo.jpg' %}/favicon.ico">
+    <link rel="shortcut icon" href="{% static 'favicons/favicon.ico' %}">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-192x192.png' %}" sizes="192x192">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-160x160.png' %}" sizes="160x160">
     <link rel="icon" type="image/png" href="{% static 'favicons/favicon-96x96.png' %}" sizes="96x96">
@@ -31,9 +31,9 @@
             </ul>
           </li>
           <li>
-            <span>Eastern Conf</span>
+            <span>Eastern</span>
             <ul>
-              <li>Atlantic Division</li>
+              <li><span>Atlantic Division</span></li>
               <li><a href="{% url 'team_detail' team='BOS' %}">Boston Bruins</a></li>
               <li><a href="{% url 'team_detail' team='BUF' %}">Buffalo Sabres</a></li>
               <li><a href="{% url 'team_detail' team='DET' %}">Detroit Red Wings</a></li>
@@ -42,8 +42,8 @@
               <li><a href="{% url 'team_detail' team='OTT' %}">Ottawa Senators</a></li>
               <li><a href="{% url 'team_detail' team='TBL' %}">Tampa Bay Lightning</a></li>
               <li><a href="{% url 'team_detail' team='TOR' %}">Toronto Maple Leafs</a></li>
-              <li></li>
-              <li>Metropolitan Division</li>
+              <li><span>&nbsp;</span></li>
+              <li><span>Metropolitan Division</span></li>
               <li><a href="{% url 'team_detail' team='CAR' %}">Carolina Hurricanes</a></li>
               <li><a href="{% url 'team_detail' team='CBJ' %}">Columbus Blue Jackets</a></li>
               <li><a href="{% url 'team_detail' team='NJD' %}">New Jersey Devils</a></li>
@@ -55,9 +55,9 @@
             </ul>
           </li>
           <li>
-            <span>Western Conf</span>
+            <span>Western</span>
             <ul>
-              <li>Central Division</li>
+              <li><span>Central Division</span></li>
               <li><a href="{% url 'team_detail' team='CHI' %}">Chicago Blackhawks</a></li>
               <li><a href="{% url 'team_detail' team='COL' %}">Colorado Avalanche</a></li>
               <li><a href="{% url 'team_detail' team='DAL' %}">Dallas Stars</a></li>
@@ -65,8 +65,8 @@
               <li><a href="{% url 'team_detail' team='NSH' %}">Nashville Predators</a></li>
               <li><a href="{% url 'team_detail' team='STL' %}">St. Louis Blues</a></li>
               <li><a href="{% url 'team_detail' team='WPG' %}">Winnepeg Jets</a></li>
-              <li></li>
-              <li>Pacific Division</li>
+              <li><span>&nbsp;</span></li>
+              <li><span>Pacific Division</span></li>
               <li><a href="{% url 'team_detail' team='ANA' %}">Anaheim Ducks</a></li>
               <li><a href="{% url 'team_detail' team='ARI' %}">Arizona Coyotes</a></li>
               <li><a href="{% url 'team_detail' team='CGY' %}">Calgary Flames</a></li>
@@ -91,10 +91,10 @@
           </div>
         </form>
       </nav>
-      <div>
+      <main>
         {% block content %}
         {% endblock %}
-      </div>
+      </main>
     </div>
   </body>
 </html>

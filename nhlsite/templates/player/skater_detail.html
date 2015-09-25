@@ -31,15 +31,15 @@
 <style>
 
 .bullet { font: 10px "Oswald", sans-serif; }
-.bullet .marker { stroke: #000; stroke-width: 2px; }
+.bullet .marker { stroke: #ffff00; stroke-width: 2px; }
 .bullet .tick line { stroke: #666; stroke-width: .5px; }
-.bullet .range.s0 { fill: #ddd; }
-.bullet .range.s1 { fill: #99f; }
-.bullet .range.s2 { fill: #9f9; }
-.bullet .range.s3 { fill: #fa9; }
-.bullet .measure.s0 { fill: #00f; }
-.bullet .measure.s1 { fill: #0f0; }
-.bullet .measure.s2 { fill: #f60; }
+.bullet .range.s0 { fill: #D2DADD; }
+.bullet .range.s1 { fill: #c5cae9; }
+.bullet .range.s2 { fill: #a5d6a7; }
+.bullet .range.s3 { fill: #ef9a9a; }
+.bullet .measure.s0 { fill: #3F51B5; }
+.bullet .measure.s1 { fill: #4caf50; }
+.bullet .measure.s2 { fill: #e53935; }
 .bullet .title { font-size: 14px; font-weight: bold; }
 .bullet .subtitle { fill: #999; }
 
@@ -49,7 +49,7 @@
 <script>
 
 var margin = {top: 5, right: 40, bottom: 20, left: 120},
-    width = 800 - margin.left - margin.right,
+    width = 690 - margin.left - margin.right,
     height = 50 - margin.top - margin.bottom;
 
 var chart = d3.bullet()
@@ -90,101 +90,113 @@ d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data
 </p>
 {% endif %}
 
-<h2>Base Statistics</h2>
-<table class="data">
-    <tr>
-        <th>Season</th>
-        <th title="Games Played">GP</th>
-        <th title="Goals">G</th>
-        <th title="Assists">A</th>
-        <th title="Points">P</th>
-        <th title="Plus/Minus">+/-</th>
-        <th title="Penalties (In Minutes)">PIM</th>
-        <th title="Shots">S</th>
-        <th title="Shot Percentage">S%</th>
-        <th title="Faceoff Wins">FOW</th>
-        <th title="Faceoff Losses">FOL</th>
-    </tr>
-    {% for season in skaterstats %}
-    <tr>
-        <td>{{ season.season }}</td>
-        <td>{{ season.games_played }}</td>
-        <td>{{ season.goals }}</td>
-        <td>{{ season.assists }}</td>
-        <td>{{ season.points }}</td>
-        <td>{{ season.plus_minus }}</td>
-        <td>{{ season.penalty_minutes }}</td>
-        <td>{{ season.shots }}</td>
-        <td>{{ season.shot_pct }}</td>
-        <td>{{ season.faceoff_wins }}</td>
-        <td>{{ season.faceoff_losses }}</td>
-    </tr>
-    {% endfor %}
-    {% if skaterpredictions %}
-    <tr class="danger">
-        <td>2015 (Predicted)</td>
-        <td>{{ skaterpredictions.games_played|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.goals|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.assists|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.points|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.plus_minus|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.penalty_minutes|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.shots|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.shot_pct|mul:100|floatformat:"1" }}</td>
-        <td>{{ skaterpredictions.faceoff_wins|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.faceoff_losses|floatformat:"0" }}</td>
-    </tr>
-    {% endif %}
-</table>
+<section>
+    <h2>Base Statistics</h2>
+    <table class="data">
+        <thead>
+            <tr>
+                <th>Season</th>
+                <th title="Games Played">GP</th>
+                <th title="Goals">G</th>
+                <th title="Assists">A</th>
+                <th title="Points">P</th>
+                <th title="Plus/Minus">+/-</th>
+                <th title="Penalties (In Minutes)">PIM</th>
+                <th title="Shots">S</th>
+                <th title="Shot Percentage">S%</th>
+                <th title="Faceoff Wins">FOW</th>
+                <th title="Faceoff Losses">FOL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for season in skaterstats %}
+            <tr>
+                <td>{{ season.season }}</td>
+                <td>{{ season.games_played }}</td>
+                <td>{{ season.goals }}</td>
+                <td>{{ season.assists }}</td>
+                <td>{{ season.points }}</td>
+                <td>{{ season.plus_minus }}</td>
+                <td>{{ season.penalty_minutes }}</td>
+                <td>{{ season.shots }}</td>
+                <td>{{ season.shot_pct }}</td>
+                <td>{{ season.faceoff_wins }}</td>
+                <td>{{ season.faceoff_losses }}</td>
+            </tr>
+            {% endfor %}
+            {% if skaterpredictions %}
+            <tr class="predicted">
+                <td>2015 (Predicted)</td>
+                <td>{{ skaterpredictions.games_played|floatformat:"0" }}</td>
+                <td>{{ skaterpredictions.goals|floatformat:"0" }}</td>
+                <td>{{ skaterpredictions.assists|floatformat:"0" }}</td>
+                <td>{{ skaterpredictions.points|floatformat:"0" }}</td>
+                <td>{{ skaterpredictions.plus_minus|floatformat:"0" }}</td>
+                <td>{{ skaterpredictions.penalty_minutes|floatformat:"0" }}</td>
+                <td>{{ skaterpredictions.shots|floatformat:"0" }}</td>
+                <td>{{ skaterpredictions.shot_pct|mul:100|floatformat:"1" }}</td>
+                <td>{{ skaterpredictions.faceoff_wins|floatformat:"0" }}</td>
+                <td>{{ skaterpredictions.faceoff_losses|floatformat:"0" }}</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</section>
 
+<section>
 <h2>Situational Statistics</h2>
 <table class="data">
-    <tr>
-        <th></th>
-        <th colspan="3">Time On Ice Per Game</th>
-        <th colspan="3">Goals</th>
-        <th colspan="3">Points</th>
-    </tr>
-    <tr>
-        <th>Season</th>
-        <th>Total</th>
-        <th title="Power Play">PP</th>
-        <th title="Short-handed">SH</th>
-        <th>Total</th>
-        <th title="Power Play">PP</th>
-        <th title="Short-handed">SH</th>
-        <th>Total</th>
-        <th title="Power Play">PP</th>
-        <th title="Short-handed">SH</th>
-    </tr>
-    {% for season in skaterstats %}
-    <tr>
-        <td>{{ season.season }}</td>
-        <td>{{ season.toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
-        <td>{{ season.pp_toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.pp_toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.pp_toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
-        <td>{{ season.sh_toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.sh_toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.sh_toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
-        <td>{{ season.goals }}</td>
-        <td>{{ season.pp_goals }}</td>
-        <td>{{ season.sh_goals }}</td>
-        <td>{{ season.points }}</td>
-        <td>{{ season.pp_points }}</td>
-        <td>{{ season.sh_points }}</td>
-    </tr>
-    {% endfor %}
-    {% if skaterpredictions %}
-    <tr class="danger">
-        <td>2015 (Predicted)</td>
-        <td>{{ skaterpredictions.toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.toi|floatformat:"0"|mod:60 }}</td>
-        <td>{{ skaterpredictions.pp_toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.pp_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.pp_toi|floatformat:"0"|mod:60 }}</td>
-        <td>{{ skaterpredictions.sh_toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.sh_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.sh_toi|floatformat:"0"|mod:60 }}</td>
-        <td>{{ skaterpredictions.goals|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.pp_goals|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.sh_goals|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.points|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.pp_points|floatformat:"0" }}</td>
-        <td>{{ skaterpredictions.sh_points|floatformat:"0" }}</td>
-    </tr>
-    {% endif %}
+    <thead>
+        <tr>
+            <th></th>
+            <th colspan="3">Time On Ice Per Game</th>
+            <th colspan="3">Goals</th>
+            <th colspan="3">Points</th>
+        </tr>
+        <tr>
+            <th>Season</th>
+            <th>Total</th>
+            <th title="Power Play">PP</th>
+            <th title="Short-handed">SH</th>
+            <th>Total</th>
+            <th title="Power Play">PP</th>
+            <th title="Short-handed">SH</th>
+            <th>Total</th>
+            <th title="Power Play">PP</th>
+            <th title="Short-handed">SH</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for season in skaterstats %}
+        <tr>
+            <td>{{ season.season }}</td>
+            <td>{{ season.toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
+            <td>{{ season.pp_toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.pp_toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.pp_toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
+            <td>{{ season.sh_toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.sh_toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.sh_toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
+            <td>{{ season.goals }}</td>
+            <td>{{ season.pp_goals }}</td>
+            <td>{{ season.sh_goals }}</td>
+            <td>{{ season.points }}</td>
+            <td>{{ season.pp_points }}</td>
+            <td>{{ season.sh_points }}</td>
+        </tr>
+        {% endfor %}
+        {% if skaterpredictions %}
+        <tr class="predicted">
+            <td>2015 (Predicted)</td>
+            <td>{{ skaterpredictions.toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ skaterpredictions.pp_toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.pp_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.pp_toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ skaterpredictions.sh_toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.sh_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.sh_toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ skaterpredictions.goals|floatformat:"0" }}</td>
+            <td>{{ skaterpredictions.pp_goals|floatformat:"0" }}</td>
+            <td>{{ skaterpredictions.sh_goals|floatformat:"0" }}</td>
+            <td>{{ skaterpredictions.points|floatformat:"0" }}</td>
+            <td>{{ skaterpredictions.pp_points|floatformat:"0" }}</td>
+            <td>{{ skaterpredictions.sh_points|floatformat:"0" }}</td>
+        </tr>
+        {% endif %}
+    </tbody>
 </table>
+</section>
 
 {% endblock %}
