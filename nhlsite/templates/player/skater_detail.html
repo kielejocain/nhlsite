@@ -4,19 +4,24 @@
 
 {% load static %}
 
-{% block title %}{{ skater }} Statistics - HockeyML{% endblock %}
+{% block title %}{{ player }} Statistics - HockeyML{% endblock %}
 
 {% block content %}
+{% if oldteams %}
+<h1>{{ player }} - {{ oldteams }}<a href="{% url 'team_detail' team=team %}">{{ team }}</a></h1>
+{% elif team %}
+<h1>{{ player }} - <a href="{% url 'team_detail' team=team %}">{{ team }}</a></h1>
+{% else %}
+<h1>{{ player }} - <a href="{% url 'team_detail' team=team %}">{{ team }}</a></h1>
+{% endif %}
 
-<h1>{{ skater }}{% if team %} - <a href="{% url 'team_detail' team=team %}">{{ team }}</a>{% endif %}</h1>
-
-<p>DOB: {{ skater.birthday }}</p>
-{% if skater.draft_position %}
-<p>Drafted: {{ skater.draft_year }}, #{{ skater.draft_position }} Overall</p>
+<p>DOB: {{ player.birthday }}</p>
+{% if player.draft_position %}
+<p>Drafted: {{ player.draft_year }}, #{{ player.draft_position }} Overall</p>
 {% else %}
 <p>Undrafted</p>
 {% endif %}
-
+{% if player.player_position != 'G' %}
 {% if skaterpredictions %}
 <h2>Visual Summary</h2>
 <p>
@@ -56,7 +61,7 @@ var chart = d3.bullet()
     .width(width)
     .height(height);
 
-d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data) {
+d3.json("{% url 'player_graph' %}?pk={{ player.nhl_num }}", function(error, data) {
   var svg = d3.select("#chart").selectAll("svg")
       .data(data)
     .enter().append("svg")
@@ -109,7 +114,7 @@ d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data
             </tr>
         </thead>
         <tbody>
-            {% for season in skaterstats %}
+            {% for season in playerstats %}
             <tr>
                 <td>{{ season.season }}</td>
                 <td>{{ season.games_played }}</td>
@@ -119,24 +124,24 @@ d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data
                 <td>{{ season.plus_minus }}</td>
                 <td>{{ season.penalty_minutes }}</td>
                 <td>{{ season.shots }}</td>
-                <td>{{ season.shot_pct }}</td>
+                <td>{{ season.shot_pct|mul:100|floatformat:"1" }}</td>
                 <td>{{ season.faceoff_wins }}</td>
                 <td>{{ season.faceoff_losses }}</td>
             </tr>
             {% endfor %}
-            {% if skaterpredictions %}
+            {% if playerpredictions %}
             <tr class="predicted">
                 <td>2015 (Predicted)</td>
-                <td>{{ skaterpredictions.games_played|floatformat:"0" }}</td>
-                <td>{{ skaterpredictions.goals|floatformat:"0" }}</td>
-                <td>{{ skaterpredictions.assists|floatformat:"0" }}</td>
-                <td>{{ skaterpredictions.points|floatformat:"0" }}</td>
-                <td>{{ skaterpredictions.plus_minus|floatformat:"0" }}</td>
-                <td>{{ skaterpredictions.penalty_minutes|floatformat:"0" }}</td>
-                <td>{{ skaterpredictions.shots|floatformat:"0" }}</td>
-                <td>{{ skaterpredictions.shot_pct|mul:100|floatformat:"1" }}</td>
-                <td>{{ skaterpredictions.faceoff_wins|floatformat:"0" }}</td>
-                <td>{{ skaterpredictions.faceoff_losses|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.games_played|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.goals|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.assists|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.points|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.plus_minus|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.penalty_minutes|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.shots|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.shot_pct|mul:100|floatformat:"1" }}</td>
+                <td>{{ playerpredictions.faceoff_wins|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.faceoff_losses|floatformat:"0" }}</td>
             </tr>
             {% endif %}
         </tbody>
@@ -167,7 +172,7 @@ d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data
         </tr>
     </thead>
     <tbody>
-        {% for season in skaterstats %}
+        {% for season in playerstats %}
         <tr>
             <td>{{ season.season }}</td>
             <td>{{ season.toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
@@ -181,22 +186,133 @@ d3.json("{% url 'player_graph' %}?pk={{ skater.nhl_num }}", function(error, data
             <td>{{ season.sh_points }}</td>
         </tr>
         {% endfor %}
-        {% if skaterpredictions %}
+        {% if playerpredictions %}
         <tr class="predicted">
             <td>2015 (Predicted)</td>
-            <td>{{ skaterpredictions.toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.toi|floatformat:"0"|mod:60 }}</td>
-            <td>{{ skaterpredictions.pp_toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.pp_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.pp_toi|floatformat:"0"|mod:60 }}</td>
-            <td>{{ skaterpredictions.sh_toi|floatformat:"0"|intdiv:60 }}:{% if skaterpredictions.sh_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ skaterpredictions.sh_toi|floatformat:"0"|mod:60 }}</td>
-            <td>{{ skaterpredictions.goals|floatformat:"0" }}</td>
-            <td>{{ skaterpredictions.pp_goals|floatformat:"0" }}</td>
-            <td>{{ skaterpredictions.sh_goals|floatformat:"0" }}</td>
-            <td>{{ skaterpredictions.points|floatformat:"0" }}</td>
-            <td>{{ skaterpredictions.pp_points|floatformat:"0" }}</td>
-            <td>{{ skaterpredictions.sh_points|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.toi|floatformat:"0"|intdiv:60 }}:{% if playerpredictions.toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ playerpredictions.toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ playerpredictions.pp_toi|floatformat:"0"|intdiv:60 }}:{% if playerpredictions.pp_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ playerpredictions.pp_toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ playerpredictions.sh_toi|floatformat:"0"|intdiv:60 }}:{% if playerpredictions.sh_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ playerpredictions.sh_toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ playerpredictions.goals|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.pp_goals|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.sh_goals|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.points|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.pp_points|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.sh_points|floatformat:"0" }}</td>
         </tr>
         {% endif %}
     </tbody>
 </table>
 </section>
+{% else %}
+<section>
+    <h2>Base Statistics</h2>
+    <table class="data">
+        <thead>
+            <tr>
+                <th>Season</th>
+                <th title="Games Played">GP</th>
+                <th title="Games Started">GS</th>
+                <th title="Wins">W</th>
+                <th title="Losses">L</th>
+                <th title="Overtime/Shootout Losses">OTL</th>
+                <th title="Saves">SV</th>
+                <th title="Shots Against">SA</th>
+                <th title="Save Percentage">SV%</th>
+                <th title="Goals Against Average">GAA</th>
+                <th title="Shutouts">SO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for season in playerstats %}
+            <tr>
+                <td>{{ season.season }}</td>
+                <td>{{ season.games_played }}</td>
+                <td>{{ season.games_started }}</td>
+                <td>{{ season.wins }}</td>
+                <td>{{ season.losses }}</td>
+                <td>{{ season.ot_losses }}</td>
+                <td>{{ season.saves }}</td>
+                <td>{{ season.shots_against }}</td>
+                <td>{{ season.save_pct|mul:100|floatformat:"1" }}</td>
+                <td>{{ season.gaa|floatformat:"2" }}</td>
+                <td>{{ season.shutouts }}</td>
+            </tr>
+            {% endfor %}
+            {% if playerpredictions %}
+            <tr class="predicted">
+                <td>2015 (Predicted)</td>
+                <td>{{ playerpredictions.games_played|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.goals|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.assists|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.points|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.plus_minus|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.penalty_minutes|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.shots|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.shot_pct|mul:100|floatformat:"1" }}</td>
+                <td>{{ playerpredictions.faceoff_wins|floatformat:"0" }}</td>
+                <td>{{ playerpredictions.faceoff_losses|floatformat:"0" }}</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</section>
+
+<section>
+<h2>Situational Statistics</h2>
+<table class="data">
+    <thead>
+        <tr>
+            <th></th>
+            <th colspan="3">Time On Ice Per Game</th>
+            <th colspan="3">Goals</th>
+            <th colspan="3">Points</th>
+        </tr>
+        <tr>
+            <th>Season</th>
+            <th>Total</th>
+            <th title="Power Play">PP</th>
+            <th title="Short-handed">SH</th>
+            <th>Total</th>
+            <th title="Power Play">PP</th>
+            <th title="Short-handed">SH</th>
+            <th>Total</th>
+            <th title="Power Play">PP</th>
+            <th title="Short-handed">SH</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for season in playerstats %}
+        <tr>
+            <td>{{ season.season }}</td>
+            <td>{{ season.toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
+            <td>{{ season.pp_toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.pp_toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.pp_toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
+            <td>{{ season.sh_toi|div:season.games_played|floatformat:"0"|intdiv:60 }}:{% if season.sh_toi|div:season.games_played|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ season.sh_toi|div:season.games_played|floatformat:"0"|mod:60 }}</td>
+            <td>{{ season.goals }}</td>
+            <td>{{ season.pp_goals }}</td>
+            <td>{{ season.sh_goals }}</td>
+            <td>{{ season.points }}</td>
+            <td>{{ season.pp_points }}</td>
+            <td>{{ season.sh_points }}</td>
+        </tr>
+        {% endfor %}
+        {% if playerpredictions %}
+        <tr class="predicted">
+            <td>2015 (Predicted)</td>
+            <td>{{ playerpredictions.toi|floatformat:"0"|intdiv:60 }}:{% if playerpredictions.toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ playerpredictions.toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ playerpredictions.pp_toi|floatformat:"0"|intdiv:60 }}:{% if playerpredictions.pp_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ playerpredictions.pp_toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ playerpredictions.sh_toi|floatformat:"0"|intdiv:60 }}:{% if playerpredictions.sh_toi|floatformat:"0"|mod:60 < 10 %}0{% endif %}{{ playerpredictions.sh_toi|floatformat:"0"|mod:60 }}</td>
+            <td>{{ playerpredictions.goals|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.pp_goals|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.sh_goals|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.points|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.pp_points|floatformat:"0" }}</td>
+            <td>{{ playerpredictions.sh_points|floatformat:"0" }}</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+</section>
+{% endif %}
+
 
 {% endblock %}

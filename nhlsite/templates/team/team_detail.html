@@ -26,17 +26,15 @@
             </tr>
         </thead>
         <tbody>
-            {% for skater in skaters %}
-            {% if skater.nhl_num.player_position != 'D' %}
+            {% for forward in forwards %}
             <tr>
-                <td><a href="{% url 'player_detail' pk=skater.nhl_num.nhl_num %}">{{ skater.nhl_num }}</a></td>
-                <td>{{ skater.nhl_num.birthday }}</td>
-                <td>{{ skater.games_played }}</td>
-                <td>{{ skater.goals }}</td>
-                <td>{{ skater.assists }}</td>
-                <td>{{ skater.points }}</td>
+                <td><a href="{% url 'player_detail' pk=forward.nhl_num.nhl_num %}">{{ forward.nhl_num }}</a></td>
+                <td>{{ forward.nhl_num.birthday }}</td>
+                <td>{{ forward.games_played }}</td>
+                <td>{{ forward.goals }}</td>
+                <td>{{ forward.assists }}</td>
+                <td>{{ forward.points }}</td>
             </tr>
-            {% endif %}
             {% endfor %}
         </tbody>
         <thead>
@@ -55,17 +53,42 @@
             </tr>
         </thead>
         <tbody>
-            {% for skater in skaters %}
-            {% if skater.nhl_num.player_position == 'D' %}
+            {% for dman in defensemen %}
             <tr>
-                <td><a href="{% url 'player_detail' pk=skater.nhl_num.nhl_num %}">{{ skater.nhl_num }}</a></td>
-                <td>{{ skater.nhl_num.birthday }}</td>
-                <td>{{ skater.games_played }}</td>
-                <td>{{ skater.goals }}</td>
-                <td>{{ skater.assists }}</td>
-                <td>{{ skater.points }}</td>
+                <td><a href="{% url 'player_detail' pk=dman.nhl_num.nhl_num %}">{{ dman.nhl_num }}</a></td>
+                <td>{{ dman.nhl_num.birthday }}</td>
+                <td>{{ dman.games_played }}</td>
+                <td>{{ dman.goals }}</td>
+                <td>{{ dman.assists }}</td>
+                <td>{{ dman.points }}</td>
             </tr>
-            {% endif %}
+            {% endfor %}
+        </tbody>
+        <thead>
+            <tr>
+                <th>Goalies</th>
+                <th></th>
+                <th colspan="4">2015 Season</th>
+            </tr>
+            <tr>
+                <th>Player</th>
+                <th title="Date of Birth">DOB</th>
+                <th title="Games Played">GP</th>
+                <th title="Games Started">GS</th>
+                <th title="Goals Against Average">GAA</th>
+                <th title="Save Percentage">SV%</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for goalie in goalies %}
+            <tr>
+                <td><a href="{% url 'player_detail' pk=goalie.nhl_num.nhl_num %}">{{ goalie.nhl_num }}</a></td>
+                <td>{{ goalie.nhl_num.birthday }}</td>
+                <td>{{ goalie.games_played }}</td>
+                <td>{{ goalie.games_started }}</td>
+                <td>{{ goalie.gaa|floatformat:"2" }}</td>
+                <td>{{ goalie.save_pct|mul:100|floatformat:"1" }}</td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>

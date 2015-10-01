@@ -1,42 +1,43 @@
+import os
 from django.http import JsonResponse
-
 from django.views.generic import ListView, DetailView
-
-from player.models import Skater, SkaterStats, SkaterPredictions, Standings
+from player.models import GoalieStats, Player, PlayerTeam, SkaterStats, SkaterPredictions, Standings
 
 
 class ListSkaterView(ListView):
-    model = Skater
+    model = Player
     template_name = 'player/skater_list.html'
 
 
-class DetailSkaterView(DetailView):
-    model = Skater
+class DetailPlayerView(DetailView):
+    model = Player
     template_name = 'player/skater_detail.html'
 
     def get_context_data(self, **kwargs):
-        context = super(DetailSkaterView, self).get_context_data(**kwargs)
-        context['skater'] = Skater.objects.get(pk=self.kwargs['pk'])
-        skater_pk = context['skater'].pk
-        context['skaterstats'] = SkaterStats.objects.filter(nhl_num=skater_pk)
-        context['skaterpredictions'] = SkaterPredictions.objects.filter(pk=self.kwargs['pk']).first()
-        teamQuery = context['skaterstats'].filter(season=2015).first()
-        if teamQuery is not None:
-            if teamQuery.team3:
-                context['team'] = teamQuery.team3
-            elif teamQuery.team2:
-                context['team'] = teamQuery.team2
-            else:
-                context['team'] = teamQuery.team
+        context = super(DetailPlayerView, self).get_context_data(**kwargs)
+        context['player'] = Player.objects.get(pk=self.kwargs['pk'])
+        skater_pk = context['player'].pk
+        if context['player'].player_position == 'G':
+            context['playerstats'] = GoalieStats.objects.filter(nhl_num=skater_pk)
         else:
-            context['team'] = None
+            context['playerstats'] = SkaterStats.objects.filter(nhl_num=skater_pk)
+        # context['skaterpredictions'] = SkaterPredictions.objects.filter(pk=self.kwargs['pk']).first()
+        teamQuery = PlayerTeam.objects.filter(nhl_num=skater_pk).filter(season=os.environ['NHL_SEASON'])
+        teams = [year.team for year in teamQuery]
+        if len(teams) == 0:
+            context['team'] = ''
+        else:
+            context['oldteams'] = ', '.join(teams[:-1])
+            if context['oldteams'] != '':
+                context['oldteams'] += ', '
+            context['team'] = teams[-1]
         return context
 
 
 def player_graph(request):
     pk = request.GET.get('pk')
     preds = SkaterPredictions.objects.filter(pk=pk).first()
-    stats = SkaterStats.objects.get(nhl_num=pk, season=2015)
+    stats = SkaterStats.objects.get(nhl_num=pk, season=os.environ['NHL_SEASON'])
     if stats.team3:
         team = stats.team3
     elif stats.team2:
